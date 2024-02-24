@@ -1,0 +1,65 @@
+import 'package:flutter/material.dart';
+import 'package:to_do_app/dashboard/export.dart';
+import 'package:to_do_app/dashboard/presentation/screens/dashboard/widgets/export.dart';
+
+class NoteCard extends StatelessWidget {
+  const NoteCard({
+    super.key,
+    required this.list,
+    required this.index,
+    required this.theme,
+  });
+  final ThemeData theme;
+  final List<Note> list;
+  final int index;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+      elevation: 2,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          vertical: 20,
+          horizontal: 12,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Flexible(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  NoteSpan(
+                    theme: theme,
+                    title: 'Title',
+                    content: list[index].title,
+                  ),
+                  const SizedBox(height: 15),
+                  NoteSpan(
+                    theme: theme,
+                    title: 'Content',
+                    content: list[index].content,
+                  ),
+                  const SizedBox(height: 15),
+                  NoteSpan(
+                    theme: theme,
+                    title: 'Group',
+                    content: list[index].group == 0
+                        ? 'Work'
+                        : list[index].group.isOdd
+                            ? 'Private'
+                            : 'Cases',
+                  ),
+                  const SizedBox(height: 15),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
